@@ -1,0 +1,1 @@
+"""Waypoint MCP server package."""
