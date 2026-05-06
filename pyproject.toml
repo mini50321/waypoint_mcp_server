@@ -1,0 +1,17 @@
+[project]
+name = "waypoint-mcp-server"
+version = "0.1.0"
+description = "MCP server that exposes lesson and IEP context for classroom modifications."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=1.9.0",
+  "pymupdf>=1.26.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["waypoint_mcp"]
