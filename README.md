@@ -139,7 +139,12 @@ Example config:
         "-m",
         "waypoint_mcp.server"
       ],
-      "cwd": "ABSOLUTE_PATH_TO_PROJECT_ROOT"
+      "cwd": "ABSOLUTE_PATH_TO_PROJECT_ROOT",
+      "env": {
+        "WAYPOINT_LESSON_PATH": "ABSOLUTE_PATH_TO_PROJECT_ROOT\\data\\lesson",
+        "WAYPOINT_IEP_PATH": "ABSOLUTE_PATH_TO_PROJECT_ROOT\\data\\iep",
+        "WAYPOINT_STUDENT_ALIAS": "student-a"
+      }
     }
   }
 }
