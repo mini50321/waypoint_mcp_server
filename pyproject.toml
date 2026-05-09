@@ -9,9 +9,18 @@ dependencies = [
   "pymupdf>=1.26.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
 [build-system]
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["waypoint_mcp"]
+[tool.setuptools.packages.find]
+include = ["waypoint_mcp*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

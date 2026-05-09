@@ -414,6 +414,51 @@ Teacher Checklist
 
 See `examples/sample_output.md` for a concrete sample teacher-facing output generated from lesson and IEP context.
 
+Additional example evidence:
+
+- `examples/tool_discovery.md` shows Claude discovering the Waypoint MCP tools.
+- `examples/tool_outputs.md` summarizes representative MCP tool outputs after loading the sample lesson and IEP.
+- `examples/sample_output.md` shows the final teacher-facing differentiation plan.
+
+---
+
+## Evaluation Criteria Fit
+
+### Output quality
+
+The final output is designed for a teacher preparing tomorrow's lesson, not as a generic worksheet generator. It includes section-by-section barriers, IEP-documented supports, recommended scaffolds, teacher actions, student-facing scaffolds, and a classroom checklist.
+
+Evidence:
+
+- `examples/sample_output.md`
+- `examples/tool_outputs.md`
+
+### Architecture decisions
+
+The server treats Claude as the reasoning and writing layer, while the MCP server provides structured, privacy-safe context. Lesson and IEP documents are normalized into stable schemas, then connected through demand/support tags so Claude can reason over focused context instead of receiving an entire raw IEP.
+
+Evidence:
+
+- `waypoint_mcp/models/`
+- `waypoint_mcp/parsers/`
+- `waypoint_mcp/retrieval/matcher.py`
+- `waypoint_mcp/tools/`
+
+### Code quality
+
+The implementation is split into loaders, parsers, models, resources, retrieval, and tools. The test suite covers the highest-risk behavior: PII redaction, grade/performance-level parsing, lesson section extraction, demand analysis, and lesson-to-IEP matching.
+
+Run tests:
+
+```bash
+py -m pip install -e ".[dev]"
+py -m pytest
+```
+
+### Domain understanding
+
+The system separates IEP-documented accommodations from recommended instructional scaffolds, distinguishes official enrolled grade from academic performance levels, preserves educationally relevant IEP context, redacts private information, and exposes parser warnings when confidence is low.
+
 ---
 
 ## Architecture Decisions
@@ -465,6 +510,25 @@ The server gives Claude focused context instead:
 ---
 
 ## Testing Checklist
+
+### Automated tests
+
+Install test dependencies and run the focused pytest suite:
+
+```bash
+py -m pip install -e ".[dev]"
+py -m pytest
+```
+
+The tests cover:
+
+- IEP privacy redaction
+- official enrolled grade vs academic performance levels
+- lesson section extraction
+- lesson demand analysis
+- lesson-to-IEP support matching
+
+### Claude Desktop checks
 
 Use these prompts in Claude Desktop.
 

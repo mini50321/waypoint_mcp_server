@@ -57,10 +57,12 @@ def _extract_sections(full_text: str) -> list[dict[str, object]]:
             continue
 
         matched_name: str | None = None
-        for pattern, normalized_name in heading_patterns:
-            if re.search(pattern, line, flags=re.IGNORECASE):
-                matched_name = normalized_name
-                break
+        is_heading_candidate = len(line) <= 80 and not line.endswith((".", "?", "!")) and not line.lower().startswith("students ")
+        if is_heading_candidate:
+            for pattern, normalized_name in heading_patterns:
+                if re.search(pattern, line, flags=re.IGNORECASE):
+                    matched_name = normalized_name
+                    break
 
         if matched_name:
             if current_name and current_lines:
