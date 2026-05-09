@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 waypoint_mcp_server.egg-info/
 .env
+data/iep
+data/lesson
